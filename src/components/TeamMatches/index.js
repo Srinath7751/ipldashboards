@@ -20,22 +20,22 @@ class TeamMatches extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
-    const response = await fetch('https://apis.ccbp.in/ipl/${id}')
+    const response = await fetch(`https://apis.ccbp.in/ipl/${id}`)
     const fetchedData = await response.json()
     const updatedData = {
       teamBannerUrl: fetchedData.team_banner_url,
       latestMatchDetails: {
-        id: fetchedData.latestMatchDetails.id,
-        competingTeam: fetchedData.latestMatchDetails.competing_team,
-        competingTeamLogo: fetchedData.latestMatchDetails.competing_team_logo,
-        date: fetchedData.latestMatchDetails.date,
-        firstInnings: fetchedData.latestMatchDetails.first_innings,
-        manOfTheMatch: fetchedData.latestMatchDetails.man_of_the_match,
-        matchStatus: fetchedData.latestMatchDetails.match_status,
-        result: fetchedData.latestMatchDetails.result,
-        secondInnings: fetchedData.latestMatchDetails.second_innings,
-        umpires: fetchedData.latestMatchDetails.umpires,
-        venue: fetchedData.latestMatchDetails.venue,
+        id: fetchedData.latest_match_details.id,
+        competingTeam: fetchedData.latest_match_details.competing_team,
+        competingTeamLogo: fetchedData.latest_match_details.competing_team_logo,
+        date: fetchedData.latest_match_details.date,
+        firstInnings: fetchedData.latest_match_details.first_innings,
+        manOfTheMatch: fetchedData.latest_match_details.man_of_the_match,
+        matchStatus: fetchedData.latest_match_details.match_status,
+        result: fetchedData.latest_match_details.result,
+        secondInnings: fetchedData.latest_match_details.second_innings,
+        umpires: fetchedData.latest_match_details.umpires,
+        venue: fetchedData.latest_match_details.venue,
       },
       recentMatches: fetchedData.recent_matches.map(recentMatch => ({
         umpires: recentMatch.umpires,
@@ -76,11 +76,13 @@ class TeamMatches extends Component {
       </ul>
     )
   }
-  renderLoader = () => {
-    ;<div className="loader" className="loader-container">
-      <Loader type="Balltriangle" color="#008FFF" height={80} width={80} />
+
+  renderLoader = () => (
+    <div data-testid="loader" className="loader-container">
+      <Loader type="BallTriangle" color="#008FFF" height={80} width={80} />
     </div>
-  }
+  )
+
   render() {
     const {isLoading} = this.state
     const {match} = this.props

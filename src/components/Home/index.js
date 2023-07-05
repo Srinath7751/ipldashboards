@@ -15,7 +15,7 @@ class Home extends Component {
   getTeamsList = async () => {
     const response = await fetch('http://apis.ccbp.in/ipl')
     const fetchData = await response.json()
-    const updatedData = fetchdata.map(eachData => ({
+    const updatedData = fetchData.teams.map(eachData => ({
       name: eachData.name,
       imageUrl: eachData.image_url,
       id: eachData.id,
@@ -35,11 +35,11 @@ class Home extends Component {
     )
   }
 
-  renderLoader = () => {
-    ;<div data-testid="loader" className="loader-container">
+  renderLoader = () => (
+    <div data-testid="loader" className="loader-container">
       <Loader type="Rings" color="#008FFF" height={80} width={80} />
     </div>
-  }
+  )
 
   render() {
     const {isLoading} = this.state
